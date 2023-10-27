@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des évènements{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container">
+{% if not events.items is same as([]) %}
+
+    <h1 class="mt-4 text-center">Listes des évènements</h1>
+    
+   <a href={{path('event_new')}} class="btn btn-primary mt-4">Créer un évènement</a>
+        
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+        {{message}}
+    </div>
+    {% endfor %}
+
+    <div class="count mt-4">
+        <h4>Il y a : {{events.getTotalItemCount}} Evènement{{ (events.getTotalItemCount) > 1 ? 's' : ''}} au total.</h4> 
+    </div>
+
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Debut</th>
+                <th scope="col" class="text-center">Fin</th>
+                <th scope="col" class="text-center">Nom</th>
+                <th scope="col" class="text-center">Adresse</th>
+                <th scope="col" class="text-center">Description</th>
+                <th scope="col" class="text-center">Image</th>
+                <th scope="col" class="text-center">Groupe</th>
+                <th scope="col" class="text-center">Créer</th>
+                <th scope="col" class="text-center">Modififier</th>
+                <th scope="col" class="text-center">Voir</th>
+                <th scope="col" class="text-center">Editer</th>
+                <th scope="col" class="text-center">Supprimer</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr class="table-primary">
+                <th scope="row" class="text-center">{{event.id}}</th>
+                <td class="text-center">{{event.start|date('d/m/y')}}</td>
+                <td class="text-center">{{event.end|date('d/m/y')}}</td>
+                <td class="text-center">{{event.name}}</td> 
+                <td class="text-center">{{event.address}}</td>
+                <td class="text-center">{{event.description}}</td>
+                <td class="text-center">{{event.image}}</td>
+                <td class="text-center">{{event.participant}}</td>
+                <td class="text-center">{{event.created_at|date('d/m/y h:i')}}</td>
+                <td class="text-center">{{event.updated_at|date('d/m/y h:i')}}</td>
+                <td><a href="{{ path('event_show', { id: event.id}) }}" class="btn btn-warning">Voir</a></td>
+                <td><a href="{{ path('event_edit', { id: event.id}) }}" class="btn btn-info">Modifier</a></td>
+                <td><a href="{{ path('event_delete', { id: event.id}) }}" class="btn btn-danger">Supprimer</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation d-flex justify-content-center">
+        {{knp_pagination_render(events)}}
+    </div>
+    {% else %}
+        <h4>Il n'y a pas d'évènements</h4>
+    {% endif %}
+
+</div>
+{% endblock %}

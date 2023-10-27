@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home_Group!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="exemple-wrapper">
+    <h1 class="text-center mt-5 mb-5">Groupes disponibles</h1>
+      {% for message in app.flashes('success') %}
+      <div class="alert alert-success mt-4">
+          {{message}}
+      </div>
+      {% endfor %}
+        <div class="btn-create_group float-end me-5">
+            <input class="btn btn-primary mt-5 mb-5 p-2" type="button" value="Créer un groupe" onclick = "window.location.href='{{ path('group_new') }}'">
+        </div>
+    <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">Nombre d'adhérents</th>
+            <th scope="col">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% for group in groups %}
+        <tr>            
+          <td>{{group.name}}</td>
+          <td>{{group.description}}</td> 
+          <td>{{group.headcount}}</td>
+          <td>
+            <a href="{{path('group_edit', {id:group.id})}}" class="btn btn-warning p-1">Editer</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}
+

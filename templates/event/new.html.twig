@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Nouvel event{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Création d'un évènement</h1>
+        {{ form(form)}}
+    </div>
+
+     {#  PARIDA NEW EVENT SYMFO
+     <h1>Create new Event</h1>
+    {{ include('event/_form.html.twig') }}
+    <a href="{{ path('app_event_index') }}">back to list</a> #}
+
+{% endblock %}

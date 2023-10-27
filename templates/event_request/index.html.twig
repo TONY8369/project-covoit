@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EventRequest index{% endblock %}
+
+{% block body %}
+    <h1>EventRequest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nb_seat</th>
+                <th>Direction</th>
+                <th>Departure_time</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event_request in event_requests %}
+            <tr>
+                <td>{{ event_request.id }}</td>
+                <td>{{ event_request.nbSeat }}</td>
+                <td>{{ event_request.direction }}</td>
+                <td>{{ event_request.departureTime ? event_request.departureTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event_request.address }}</td>
+                <td>{{ event_request.type }}</td>
+                <td>{{ event_request.createdAt ? event_request.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event_request.updatedAt ? event_request.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('event_request_show', {'id': event_request.id}) }}">show</a>
+                    <a href="{{ path('event_request_edit', {'id': event_request.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('event_request_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AddKidGroupController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+    <h1 class="text-center mb-5">Ajouter un enfant</h1>
+    <div class="icon ms-5">
+        <a href="{{path('group_index')}}"> <i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
+    <div class="example-wrapper">
+        <div class="form-search mt-5 mb-5">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <hr>
+        <div class="create-group_kid mt-5">
+            {{ form_start(form) }}
+                <div class="mt-5">
+                    <div class="col-8 mt-3">
+                        {{ form_row(form.firstname) }}
+                    </div>
+                    <div class="col-8 mt-3">
+                        {{ form_row(form.lastname) }}
+                    </div>
+                    <div class="col-8 mt-3">
+                        {{ form_row(form.birthdate) }}
+                    </div>
+                    <div class="col-8 mt-3">
+                        {{ form_row(form.note_public) }}
+                    </div>
+                </div>
+                <div class="submit-button float-end">
+                    <div class="col-8 mt-3">
+                        {{ form_row(form.submit) }}
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

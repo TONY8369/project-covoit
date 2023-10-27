@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edite-Group-Controller!
+{% endblock %}
+
+{% block body %}
+
+	<div class="example-wrapper mt-2">
+		<h1 class="text-center mb-5">Modifier d'un groupe</h1>
+		    <div class="float-end me-5 mt-3">
+			    {{form(formDelete)}}
+			</div>
+			<div class="icon ms-5">
+				<a href="{{path('group')}}">
+					<i class="fas fa-arrow-left"></i>
+					Retour</a>
+			</div>
+			<div class="form-control mt-5 p-5">
+				{{ form_start(form) }}
+				<div class="d-flex mt-5">
+					<div class="col-5 me-5">
+						{{ form_row(form.name) }}
+					</div>
+					<div class="col-3 ms-5">
+						{{ form_row(form.headcount) }}
+					</div>
+				</div>
+				<div class="textarea mb-5">
+					{{ form_row(form.description) }}
+				</div>
+				{{ form_end(form) }}
+			</div>
+			{# <p>
+				l'id du groupe{{ group_id}}</p> #}
+			<hr>
+			<div class="group_kid mt-5">
+				<div class="btn-create_group float-end me-5">
+					<a class="btn btn-primary mt-5 mb-5 p-2" type="button" href="{{ path('add_kid_group', {group_id:group_id} ) }}">Ajouter un adhérent</a>
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Nom</th>
+							<th scope="col">Prénom</th>
+							<th scope="col">Date de naissance</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for kid in kids %}
+							<tr>
+								<td>{{kid.firstname}}</td>
+								<td>{{kid.lastname}}</td>
+								<td>{{kid.birthdate}}</td>
+								<td></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	{% endblock %}

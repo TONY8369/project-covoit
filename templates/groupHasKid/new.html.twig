@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register-Group-Controller!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper mt-2">
+    <h1 class="text-center mb-5">Création d'un groupe</h1>
+    <div class="icon ms-5">
+        <a href="{{path('group_index')}}"> <i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
+    <div class="form-control mt-5 p-5">
+    
+        {{ form_start(form) }}
+            <div class="d-flex mt-5">
+                <div class="col-5 me-5">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col-3 ms-5">
+                    {{ form_row(form.headcount) }}
+                </div>
+            </div>
+            <div class="textarea mb-5">
+                {{ form_row(form.description) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

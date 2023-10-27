@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Association{% endblock %}
+
+{% block body %}
+    <div class="container">
+    {# {% for label, messages in app.flashes(['success', 'error']) %}
+    {% for message in messages %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %} #}
+
+    <h1>Create new Association</h1>
+        {# {{ form(form) }} #}
+
+    {# {{ form_start(form)}}
+        {{ form_label(form.title, null, {'label_attr': {'class':'form-label'}} ) }}
+        {{ form_widget(form.title, {'attr': {'class':'form-control'}}) }}
+
+        {{ form_label(form.content, null, {'label_attr': {'class':'form-label'}} ) }}
+        {{ form_widget(form.content, {'attr': {'class':'form-control'}}) }}
+
+        {{ form_label(form.dateCreation, null, {'label_attr': {'class':'form-label'}} ) }}
+        {{ form_widget(form.dateCreation, {'attr': {'class':'form-control'}}) }}
+
+        {{ form_rest(form)}}
+        <button class="btn btn-warning mt-2" type="submit">Submit</button>
+    {{ form_end(form)}} #}
+
+    <div>
+    {{ include('association/_form.html.twig', {'button_label': 'Enregistrer'})}}
+    </div>
+
+
+    </div>
+
+
+    <a href="{{ path('association_index') }}">back to list</a>
+{% endblock %}
