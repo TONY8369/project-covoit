@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EventRequest{% endblock %}
+
+{% block body %}
+    <h1>EventRequest</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event_request.id }}</td>
+            </tr>
+            <tr>
+                <th>Nb_seat</th>
+                <td>{{ event_request.nbSeat }}</td>
+            </tr>
+            <tr>
+                <th>Direction</th>
+                <td>{{ event_request.direction }}</td>
+            </tr>
+            <tr>
+                <th>Departure_time</th>
+                <td>{{ event_request.departureTime ? event_request.departureTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ event_request.address }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ event_request.type }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ event_request.createdAt ? event_request.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ event_request.updatedAt ? event_request.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('event_request_index') }}">back to list</a>
+
+    <a href="{{ path('aevent_request_edit', {'id': event_request.id}) }}">edit</a>
+
+    {{ include('event_request/_delete_form.html.twig') }}
+{% endblock %}

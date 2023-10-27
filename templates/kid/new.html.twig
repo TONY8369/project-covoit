@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SymCovoit - Inscription {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Création d'un profil enfant</h1>
+        <div class="card border-primary mt-4 ">
+            <div class="card-header text-center"><font style="vertical-align: inherit;"><h2>Selectionnez</h2></font></div>
+        </div>
+
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="list" class="form-label mt-4"><font style="vertical-align: inherit;">Liste enfant</font></label>
+                    <select class="form-select" name="list" id="list"> 
+                        {% for lists in list %}
+                            <option value="{{lists.id}} {{lists.lastname}} {{lists.firstname}}"><font style="vertical-align: inherit;"></font> {{lists.lastname}} /  {{lists.firstname}}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+            <div class="container d-flex justify-content-end mt-4">
+            <a href={{path('user_new')}}>
+                <button type="submit" class="btn btn-primary "><font style="vertical-align: inherit;">Validez</font></button>
+            </a>    
+            </div>
+        </form>
+        
+             
+        <h3>Ou</h3>
+
+        <div class="card border-primary mt-4 ">
+            <div class="card-header text-center"><font style="vertical-align: inherit;"><h2>Crée</h2></font></div>
+        </div>
+        
+          
+        {{ form(form)}}
+    </div>
+{% endblock %}

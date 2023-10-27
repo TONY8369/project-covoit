@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}group index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+{# {% if not groups.items is same as([]) %} #}
+
+    <h1 class="mt-4 text-center">Liste des groupes</h1>
+    
+    <div class="container">
+        <a href={{path('group_new')}} class="btn btn-primary mt-4">Créer un groupe</a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+        {{message}}
+    </div>
+    {% endfor %}
+
+
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th scope="col"class="text-center">ID</th>
+                <th scope="col"class="text-center">Nom</th>
+                <th scope="col"class="text-center">Capacité</th>
+                <th scope="col"class="text-center">Description</th>
+                <th scope="col"class="text-center">Créé le</th>
+                <th scope="col"class="text-center">Modifié le</th>
+                <th scope="col"class="text-center">Ajouter</th>
+                <th scope="col"class="text-center">Editer</th>
+                <th scope="col"class="text-center">Voir</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr class="table-primary">
+                <th scope="row"class="text-center">{{group.id}}</th>
+                <td class="text-center">{{group.name}}</td> 
+                <td class="text-center">{{group.headcount}}</td>
+                <td class="text-center">{{group.description}}</td>                
+                <td class="text-center">{{group.created_at|date('d/m/y h:i')}}</td>
+                <td class="text-center">{{group.updated_at|date('d/m/y h:i')}}</td> 
+                <td class="text-center"><a href="{{ path('group_new', { id: group.id}) }}" class="btn btn-info">Ajouter</a></td>
+                <td class="text-center"><a href="{{ path('group_edit', { id: group.id}) }}" class="btn btn-info">Modifier</a></td>
+                <td class="text-center"><a href="{{ path('groupHasKid_show', { id: group.id}) }}" class="btn btn-warning">Voir</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# <div class="navigation d-flex justify-content-center">
+        {{knp_pagination_render(users)}}
+    </div> #}
+    {# {% else %}
+        <h4>Il n'y a pas d'utilisateurs</h4>
+    {% endif %} #}
+
+</div>
+{% endblock %}

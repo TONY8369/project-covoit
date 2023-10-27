@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+{% if not users.items is same as([]) %}
+
+    <h1 class="mt-4 text-center">Listes des utilisateurs</h1>
+    
+    <div class="container">
+        <a href={{path('user_new')}} class="btn btn-primary mt-4">Créer un utilisateur</a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+        {{message}}
+    </div>
+    {% endfor %}
+
+    <div class="count mt-4">
+        <h4>Il y a : {{users.getTotalItemCount}} Utilisateur{{ (users.getTotalItemCount) > 1 ? 's' : ''}} au total.</h4> 
+    </div>
+
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th scope="col"class="text-center">ID</th>
+                <th scope="col"class="text-center">Civilité</th>
+                <th scope="col"class="text-center">Nom</th>
+                <th scope="col"class="text-center">Prenom</th>
+                <th scope="col"class="text-center">Email</th>
+                <th scope="col"class="text-center">Téléphone</th>
+                <th scope="col"class="text-center">Statut</th>
+                <th scope="col"class="text-center">Creation</th>
+                <th scope="col"class="text-center">Mise à jour</th>
+                <th scope="col"class="text-center">Ajouter</th>
+                <th scope="col"class="text-center">Ratacher</th>
+                <th scope="col"class="text-center">Editer</th>
+                <th scope="col"class="text-center">Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="table-primary">
+                <th scope="row"class="text-center">{{user.id}}</th>
+                 {% if user.civility is same as 1 %}
+                   <td class="text-center">PAPA</td>
+                    {% elseif user.civility is same as 2 %}
+                    <td class="text-center">MAMAN</td>
+                    {% else %} 
+                    <td class="text-center">AUTRE</td>
+                    {% endif %}  
+                {# <td class="text-center">{{user.civility is same as 1 ? 'PAPA' : ''}}</td> #}
+                <td class="text-center">{{user.lastname}}</td>
+                <td class="text-center">{{user.firstname}}</td> 
+                <td class="text-center">{{user.email}}</td>
+                <td class="text-center">{{user.phone}}</td>
+                <td class="text-center">{{user.status is same as 1 ? 'ACTIF' : 'INACTIF'}}</td>
+                <td class="text-center">{{user.created_at|date('d/m/y h:i')}}</td>
+                <td class="text-center">{{user.updated_at|date('d/m/y h:i')}}</td> 
+                <td class="text-center"><a href="{{path('kid_new', { id: user.id}) }}" class="btn btn-info">Enfant</a></td>
+                <td>
+                    {% for kid in user.kids %}
+                        {% if kid.lastname is defined %}
+                        <ul>
+                            <li>{{ kid.firstname}} {{kid.lastname}}</li> 
+                        </ul>
+                        {% else %}
+                            <p>Aucun</p>
+                        {% endif %}  
+                    {% endfor %}
+                </td>
+                 {% if user.status is same as 1 %}
+                    <td class="text-center"><a href="{{ path('kid_edit', { id: user.id}) }}" class="btn btn-info">Edit enfant rataché</a></td>
+                    {% else %} 
+                    <td class="text-center"><a href="{{ path('user_edit', { id: user.id}) }}" class="btn btn-info">Modifier</a></td>
+                    {% endif %}     
+                {# <td class="text-center"><a href="{{ path('user_edit', { id: user.id}) }}" class="btn btn-info">Modifier2</a></td> #}
+                <td class="text-center"><a href="{{ path('user_delete', { id: user.id}) }}" class="btn btn-warning">Supprimer</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation d-flex justify-content-center">
+        {{knp_pagination_render(users)}}
+    </div>
+    {% else %}
+        <h4>Il n'y a pas d'utilisateurs</h4>
+    {% endif %}
+
+</div>
+{% endblock %}
+

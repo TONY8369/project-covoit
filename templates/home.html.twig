@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}COVOIT-SymCovoit{% endblock %}
+
+{% block body %} 
+
+<div class="container">
+  <h1 class="display-4">Bienvenue sur SymCovoit</h1>
+  <p class="lead">
+    SymCovoit est une application de covoiturage d'évènement associatif de ta ville.
+    Tu pourras proposer ou demander un covoiturage pour te rendre dans différents évènements
+  </p>
+  <hr class="my-4">
+
+  {# //TODO FAIRE DISPARAITRE LE BOUTON LOGIN QUAND Utilisateur authneticated #}
+  <a class="btn btn-primary" href="{{ path('login') }}" role="button">Login</a>
+  <a class="btn btn-primary" href="{{ path('request_reset_password') }}" role="button">Mot de passe oublié?</a>
+
+</div>
+
+ {% endblock %}
